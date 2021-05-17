@@ -1,6 +1,8 @@
 package com.model.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Cliente {
 
     @Id
@@ -21,14 +24,14 @@ public class Cliente {
     @Column(nullable = false, length = 150)
     private String nome;
 
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 11,updatable = false)
     private String cpf;
 
     @Column(nullable = false, length = 15)
     private String rg;
 
     @Column
-    private boolean sexo;
+    private String sexo;
 
     @Column(nullable = false, length = 20)
     private String tel1;
@@ -57,7 +60,8 @@ public class Cliente {
     @Column(nullable = false, length = 50)
     private String estadoCivil;
 
-    @Column
+    @Column(updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dtNasc;
 
     @Column(nullable = false, length = 2)
