@@ -1,4 +1,4 @@
-package com.model.Entity;
+package com.application.Model;
 
 public class Analise {
 }

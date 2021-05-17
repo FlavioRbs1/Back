@@ -1,6 +1,6 @@
-package com.model.Repository;
+package com.application.Repository;
 
-import com.model.Entity.Inadimplencias;
+import com.application.Model.Inadimplencias;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InadimplenciasRepository extends JpaRepository<Inadimplencias,Integer> {

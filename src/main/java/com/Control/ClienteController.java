@@ -1,7 +1,7 @@
-package com.rest;
+package com.Control;
 
-import com.model.Entity.Cliente;
-import com.model.Repository.ClienteRepository;
+import com.application.Model.Cliente;
+import com.application.Repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

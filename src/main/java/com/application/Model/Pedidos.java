@@ -1,4 +1,4 @@
-package com.model.Entity;
+package com.application.Model;
 
 import lombok.Data;
 
@@ -15,7 +15,7 @@ public class Pedidos {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "id_cliente",updatable = false)
     private Cliente cliente;
 
     @Column
@@ -26,6 +26,9 @@ public class Pedidos {
 
     @Column(nullable = false)
     private String formaPagamento;
+
+    @Column
+    private Integer parcelas;
 
     @Column(nullable = true, length = 30)
     private String situacao;
