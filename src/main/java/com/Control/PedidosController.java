@@ -32,15 +32,7 @@ public class PedidosController {
                 .findById(id)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Integer id){
-        repository.findById(id).map(pedidos -> {
-            repository.delete(pedidos);
-            return TYPE;
-        })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
+
     @PutMapping("id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public  void  atualizar(@PathVariable Integer id, @RequestBody Pedidos pedidosatualizado){
