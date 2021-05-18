@@ -32,18 +32,7 @@ public class InadimplenciasController {
                 .findById(id)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Integer id){
-        repository
-                .findById(id)
-                .map(inadimplencias ->{
-                    repository.delete(inadimplencias);
-                    return TYPE;
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-    }
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizar(@PathVariable Integer id, @RequestBody Inadimplencias inadimplenciasatualizado){
