@@ -1,7 +1,7 @@
 package com.Control;
 
-import com.application.Model.Pedidos;
-import com.application.Repository.PedidosRepository;
+import com.Model.Pedidos;
+import com.Repository.PedidosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
