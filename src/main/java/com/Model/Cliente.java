@@ -1,12 +1,15 @@
 package com.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,9 +25,12 @@ public class Cliente {
     private Integer id;
 
     @Column(nullable = false, length = 150)
+    @NotEmpty (message = "{campo.nome.obrigatorio}")
     private String nome;
 
     @Column(nullable = false,length = 11,updatable = false)
+    @NotEmpty (message = "{campo.cpf.obrigatorio}")
+    @CPF(message = "{campo.cpf.invalido}" )
     private String cpf;
 
     @Column(nullable = false, length = 15)
@@ -45,7 +51,7 @@ public class Cliente {
     @Column(nullable = false, length = 15)
     private Integer numero;
 
-    @Column(nullable = true, length = 100)
+    @Column( length = 100)
     private String complemento;
 
     @Column(nullable = false, length = 60)
@@ -76,12 +82,12 @@ public class Cliente {
     @Column(nullable = false, length = 50)
     private BigDecimal renda;
 
-    @Column(nullable = true, length = 50)
+    @Column( length = 50)
     private BigDecimal rendaFamiliar;
 
-    @Column(nullable = true, length = 50)
+    @Column( length = 50)
     private BigDecimal rendaTotal;
 
-    @Column(nullable = true, length = 150)
+    @Column( length = 150)
     private String comentarios;
 }

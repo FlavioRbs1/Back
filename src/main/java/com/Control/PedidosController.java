@@ -33,12 +33,14 @@ public class PedidosController {
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("id")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public  void  atualizar(@PathVariable Integer id, @RequestBody Pedidos pedidosatualizado){
-        repository.findById(id).map(pedidos -> {
-            pedidosatualizado.setId(pedidos.getId());
-            return  repository.save(pedidosatualizado);
+    public void atualizar(@PathVariable Integer id, @RequestBody Pedidos pedidosatualizado){
+        repository
+                .findById(id)
+                .map(pedidos -> {
+                    pedidosatualizado.setId(pedidos.getId());
+                    return  repository.save(pedidosatualizado);
         })
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
