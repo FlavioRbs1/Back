@@ -15,22 +15,22 @@ public class Pedidos {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente",updatable = false)
+    @JoinColumn
     private Cliente cliente;
 
     @Column
     private Date dia;
 
-    @Column(nullable = false)
+    @Column
     private BigDecimal valor;
 
-    @Column(nullable = false)
+    @Column
     private String formaPagamento;
 
     @Column
     private Integer parcelas;
 
-    @Column( length = 30)
+    @Column
     private String situacao;
 
 
