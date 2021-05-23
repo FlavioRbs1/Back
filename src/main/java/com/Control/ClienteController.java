@@ -16,7 +16,9 @@ import static java.lang.Void.TYPE;
 @RestController
 @RequestMapping("/api/clientes")
 public class ClienteController {
+
     private final ClienteRepository repository;
+
     @Autowired
     public ClienteController(ClienteRepository repository){
         this.repository = repository;
@@ -24,7 +26,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente salvar(Cliente cliente){
+    public Cliente salvar(@RequestBody Cliente cliente){
             return repository.save(cliente);
     }
 

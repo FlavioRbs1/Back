@@ -22,7 +22,7 @@ public class Enderecos {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
     @Column( length = 100)

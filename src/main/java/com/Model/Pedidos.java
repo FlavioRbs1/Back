@@ -15,7 +15,7 @@ public class Pedidos {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
     @Column
