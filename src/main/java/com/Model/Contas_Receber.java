@@ -1,5 +1,6 @@
 package com.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class Contas_Receber {
 
     @Id
@@ -21,7 +23,7 @@ public class Contas_Receber {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_pedidos")
+    @JoinColumn(name = "id_pedidos")
     private Pedidos pedido;
 
     @Column
@@ -31,9 +33,11 @@ public class Contas_Receber {
     private BigDecimal valor;
 
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date vencimento;
 
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date pagamento;
 
     @Column
