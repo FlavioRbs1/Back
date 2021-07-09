@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -47,4 +48,39 @@ public class Cliente {
 
     @Column( length = 150)
     private String comentarios;
+    @Column( length = 100)
+    private String endereco;
+
+    @Column( length = 15)
+    private Integer numero;
+
+    @Column( length = 100)
+    private String complemento;
+
+    @Column( length = 60)
+    private String bairro;
+
+    @Column(length = 50)
+    private String cidade;
+
+    @Column( length = 50)
+    private String estado;
+
+    @Column( length = 2)
+    private Integer dependentes;
+
+    @Column( length = 100)
+    private String profissao;
+
+    @Column( length = 100)
+    private String empresa;
+
+    @Column( length = 50)
+    private BigDecimal renda;
+
+    @Column( length = 50)
+    private BigDecimal rendaFamiliar;
+
+    @Column( length = 50)
+    private BigDecimal rendaTotal;
 }
