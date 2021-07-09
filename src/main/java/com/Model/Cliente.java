@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -48,6 +47,7 @@ public class Cliente {
 
     @Column( length = 150)
     private String comentarios;
+
     @Column( length = 100)
     private String endereco;
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import static java.lang.Void.TYPE;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -37,30 +36,16 @@ public class ClienteController {
                 .findById(id)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-    @DeleteMapping("{id}")
+
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Integer id){
+    public void atualizar(@PathVariable Integer id, @RequestBody Cliente clienteatualizado){
         repository
                 .findById(id)
                 .map(cliente ->{
-                    repository.delete(cliente);
-                    return TYPE;
+                    clienteatualizado.setId(cliente.getId());
+                    return repository.save(clienteatualizado);
                 })
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        }
-        @PutMapping("{id}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void atualizar(@PathVariable Integer id, @RequestBody Cliente clienteatualizado){
-            repository
-                    .findById(id)
-                    .map(cliente ->{
-                        clienteatualizado.setId(cliente.getId());
-                        return repository.save(clienteatualizado);
-                    })
-                    .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-
-        }
-
     }
+}
