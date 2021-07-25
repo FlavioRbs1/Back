@@ -84,4 +84,6 @@ public class Cliente {
 
     @Column
     private String tel2;
+   
+    
 }
