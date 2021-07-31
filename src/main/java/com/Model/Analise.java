@@ -1,6 +1,8 @@
 package com.Model;
 
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +19,15 @@ public class Analise {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
-	private Integer analise;
+	private Integer id;
+	private Integer cliente;
+	private Date dataAnalise;
+	private Integer analiseCpf;
+	private Integer analiseEstCivil;
+	private Integer analiseIdade;
+	private Integer analiseProfissao;
+	private Integer analiseRenda;
+	private Integer analisePerc;
+	private String situacao;
+	private String concessao;
 }

@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-parent</artifactId>
-			<version>2.4.5</version>
+			<version>2.5.3</version>
 			<type>pom</type>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
@@ -33,13 +33,7 @@
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.lucee/postgresql -->
-		<dependency>
-			<groupId>org.lucee</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>8.3-606.jdbc4</version>
-		</dependency>
-
+	
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
