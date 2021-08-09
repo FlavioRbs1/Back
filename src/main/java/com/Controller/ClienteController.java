@@ -38,4 +38,6 @@ public class ClienteController {
 	public Cliente replace(@PathVariable String cpf,@RequestBody Cliente cliente) {
 		return repository.save(cliente);
 	}
+	
+	
 }

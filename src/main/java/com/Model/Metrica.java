@@ -26,23 +26,23 @@ public class Metrica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(length = 1)
-	private Integer analiseCpf;
+	@Column
+	private boolean analiseCpf;
 	
-	@Column(length = 1)
-	private Integer analiseEstCivil;
+	@Column
+	private boolean analiseEstCivil;
 	
-	@Column(length = 1)
-	private Integer analiseIdade;
+	@Column
+	private boolean analiseIdade;
 	
-	@Column(length = 1)
-	private Integer analisePercEndiv;
+	@Column
+	private boolean analisePercEndiv;
 	
-	@Column(length = 1)
-	private Integer analiseProfissao;
+	@Column
+	private boolean analiseProfissao;
 	
-	@Column(length = 1)
-	private Integer analiseRenda;
+	@Column
+	private boolean analiseRenda;
 	
 	@Column(length = 50 )
 	private BigDecimal classAmarelo;
@@ -56,13 +56,126 @@ public class Metrica {
 	@Column(length = 50 )
 	private BigDecimal classVermelho;
 	
-	@Column(length = 1)
-	private Integer libAutomatica;
+	@Column
+	private boolean libAutomatica;
 	
 	@Column(length = 50 )
 	private BigDecimal limiteCredito;
 	
 	@Column(length = 3)
 	private Integer percentual;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public boolean isAnaliseCpf() {
+		return analiseCpf;
+	}
+
+	public void setAnaliseCpf(boolean analiseCpf) {
+		this.analiseCpf = analiseCpf;
+	}
+
+	public boolean isAnaliseEstCivil() {
+		return analiseEstCivil;
+	}
+
+	public void setAnaliseEstCivil(boolean analiseEstCivil) {
+		this.analiseEstCivil = analiseEstCivil;
+	}
+
+	public boolean isAnaliseIdade() {
+		return analiseIdade;
+	}
+
+	public void setAnaliseIdade(boolean analiseIdade) {
+		this.analiseIdade = analiseIdade;
+	}
+
+	public boolean isAnalisePercEndiv() {
+		return analisePercEndiv;
+	}
+
+	public void setAnalisePercEndiv(boolean analisePercEndiv) {
+		this.analisePercEndiv = analisePercEndiv;
+	}
+
+	public boolean isAnaliseProfissao() {
+		return analiseProfissao;
+	}
+
+	public void setAnaliseProfissao(boolean analiseProfissao) {
+		this.analiseProfissao = analiseProfissao;
+	}
+
+	public boolean isAnaliseRenda() {
+		return analiseRenda;
+	}
+
+	public void setAnaliseRenda(boolean analiseRenda) {
+		this.analiseRenda = analiseRenda;
+	}
+
+	public BigDecimal getClassAmarelo() {
+		return classAmarelo;
+	}
+
+	public void setClassAmarelo(BigDecimal classAmarelo) {
+		this.classAmarelo = classAmarelo;
+	}
+
+	public BigDecimal getClassAzul() {
+		return classAzul;
+	}
+
+	public void setClassAzul(BigDecimal classAzul) {
+		this.classAzul = classAzul;
+	}
+
+	public BigDecimal getClassVerde() {
+		return classVerde;
+	}
+
+	public void setClassVerde(BigDecimal classVerde) {
+		this.classVerde = classVerde;
+	}
+
+	public BigDecimal getClassVermelho() {
+		return classVermelho;
+	}
+
+	public void setClassVermelho(BigDecimal classVermelho) {
+		this.classVermelho = classVermelho;
+	}
+
+	public boolean isLibAutomatica() {
+		return libAutomatica;
+	}
+
+	public void setLibAutomatica(boolean libAutomatica) {
+		this.libAutomatica = libAutomatica;
+	}
+
+	public BigDecimal getLimiteCredito() {
+		return limiteCredito;
+	}
+
+	public void setLimiteCredito(BigDecimal limiteCredito) {
+		this.limiteCredito = limiteCredito;
+	}
+
+	public Integer getPercentual() {
+		return percentual;
+	}
+
+	public void setPercentual(Integer percentual) {
+		this.percentual = percentual;
+	}
+	
 	
 }
