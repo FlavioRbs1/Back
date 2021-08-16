@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,14 +22,138 @@ public class Analise {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer cliente;
+	
+	@ManyToOne
+	@JoinColumn(name ="id_cliente")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name ="id_pedidos")
+	private Pedidos pedido;
+	
+	@Column
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataAnalise;
+	
+	@Column(length = 3)
 	private Integer analiseCpf;
+	
+	@Column(length = 3)
 	private Integer analiseEstCivil;
+	
+	@Column(length = 3)
 	private Integer analiseIdade;
+	
+	@Column(length = 3)
 	private Integer analiseProfissao;
+	
+	@Column(length = 3)
 	private Integer analiseRenda;
+	
+	@Column(length = 3)
 	private Integer analisePerc;
+	
+	@Column
 	private String situacao;
+	
+	@Column
 	private String concessao;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Pedidos getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedidos pedido) {
+		this.pedido = pedido;
+	}
+
+	public Date getDataAnalise() {
+		return dataAnalise;
+	}
+
+	public void setDataAnalise(Date dataAnalise) {
+		this.dataAnalise = dataAnalise;
+	}
+
+	public Integer getAnaliseCpf() {
+		return analiseCpf;
+	}
+
+	public void setAnaliseCpf(Integer analiseCpf) {
+		this.analiseCpf = analiseCpf;
+	}
+
+	public Integer getAnaliseEstCivil() {
+		return analiseEstCivil;
+	}
+
+	public void setAnaliseEstCivil(Integer analiseEstCivil) {
+		this.analiseEstCivil = analiseEstCivil;
+	}
+
+	public Integer getAnaliseIdade() {
+		return analiseIdade;
+	}
+
+	public void setAnaliseIdade(Integer analiseIdade) {
+		this.analiseIdade = analiseIdade;
+	}
+
+	public Integer getAnaliseProfissao() {
+		return analiseProfissao;
+	}
+
+	public void setAnaliseProfissao(Integer analiseProfissao) {
+		this.analiseProfissao = analiseProfissao;
+	}
+
+	public Integer getAnaliseRenda() {
+		return analiseRenda;
+	}
+
+	public void setAnaliseRenda(Integer analiseRenda) {
+		this.analiseRenda = analiseRenda;
+	}
+
+	public Integer getAnalisePerc() {
+		return analisePerc;
+	}
+
+	public void setAnalisePerc(Integer analisePerc) {
+		this.analisePerc = analisePerc;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	public String getConcessao() {
+		return concessao;
+	}
+
+	public void setConcessao(String concessao) {
+		this.concessao = concessao;
+	}
+	
+	
 }

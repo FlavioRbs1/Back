@@ -7,5 +7,6 @@ import com.Model.Metrica;
 
 public interface MetricaRepository extends JpaRepository<Metrica,Integer> {
 	
+	Object findByid(Integer id);
 	
 }

@@ -28,13 +28,73 @@ public class Usuarios {
 	@Column(length = 10)
 	private String senha;
 	
-	@Column(length = 1)
-	private Integer tipoUser;
+	@Column(length = 15)
+	private String tipoUser;
+
 	
-	@Column(length = 1)
-	private boolean liberado;
+	@Column(length = 15)
+	private String situacao;
 	
 	@Column(updatable = false)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date cadastroUser;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getTipoUser() {
+		return tipoUser;
+	}
+
+	public void setTipoUser(String tipoUser) {
+		this.tipoUser = tipoUser;
+	}
+
+
+	public Date getCadastroUser() {
+		return cadastroUser;
+	}
+
+	public void setCadastroUser(Date cadastroUser) {
+		this.cadastroUser = cadastroUser;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+	
+	
 }

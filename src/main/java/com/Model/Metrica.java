@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,23 +24,23 @@ public class Metrica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column
-	private boolean analiseCpf;
+	@Column(length = 15 )
+	private String analiseCpf;
 	
-	@Column
-	private boolean analiseEstCivil;
+	@Column(length = 15 )
+	private String analiseEstCivil;
 	
-	@Column
-	private boolean analiseIdade;
+	@Column(length = 15 )
+	private String analiseIdade;
 	
-	@Column
-	private boolean analisePercEndiv;
+	@Column(length = 15 )
+	private String analisePercEndiv;
 	
-	@Column
-	private boolean analiseProfissao;
+	@Column(length = 15 )
+	private String analiseProfissao;
 	
-	@Column
-	private boolean analiseRenda;
+	@Column(length = 15 )
+	private String analiseRenda;
 	
 	@Column(length = 50 )
 	private BigDecimal classAmarelo;
@@ -56,8 +54,8 @@ public class Metrica {
 	@Column(length = 50 )
 	private BigDecimal classVermelho;
 	
-	@Column
-	private boolean libAutomatica;
+	@Column(length = 10 )
+	private String libAutomatica;
 	
 	@Column(length = 50 )
 	private BigDecimal limiteCredito;
@@ -73,51 +71,51 @@ public class Metrica {
 		this.id = id;
 	}
 
-	public boolean isAnaliseCpf() {
+	public String isAnaliseCpf() {
 		return analiseCpf;
 	}
 
-	public void setAnaliseCpf(boolean analiseCpf) {
+	public void setAnaliseCpf(String analiseCpf) {
 		this.analiseCpf = analiseCpf;
 	}
 
-	public boolean isAnaliseEstCivil() {
+	public String isAnaliseEstCivil() {
 		return analiseEstCivil;
 	}
 
-	public void setAnaliseEstCivil(boolean analiseEstCivil) {
+	public void setAnaliseEstCivil(String analiseEstCivil) {
 		this.analiseEstCivil = analiseEstCivil;
 	}
 
-	public boolean isAnaliseIdade() {
+	public String isAnaliseIdade() {
 		return analiseIdade;
 	}
 
-	public void setAnaliseIdade(boolean analiseIdade) {
+	public void setAnaliseIdade(String analiseIdade) {
 		this.analiseIdade = analiseIdade;
 	}
 
-	public boolean isAnalisePercEndiv() {
+	public String isAnalisePercEndiv() {
 		return analisePercEndiv;
 	}
 
-	public void setAnalisePercEndiv(boolean analisePercEndiv) {
+	public void setAnalisePercEndiv(String analisePercEndiv) {
 		this.analisePercEndiv = analisePercEndiv;
 	}
 
-	public boolean isAnaliseProfissao() {
+	public String isAnaliseProfissao() {
 		return analiseProfissao;
 	}
 
-	public void setAnaliseProfissao(boolean analiseProfissao) {
+	public void setAnaliseProfissao(String analiseProfissao) {
 		this.analiseProfissao = analiseProfissao;
 	}
 
-	public boolean isAnaliseRenda() {
+	public String isAnaliseRenda() {
 		return analiseRenda;
 	}
 
-	public void setAnaliseRenda(boolean analiseRenda) {
+	public void setAnaliseRenda(String analiseRenda) {
 		this.analiseRenda = analiseRenda;
 	}
 
@@ -153,11 +151,11 @@ public class Metrica {
 		this.classVermelho = classVermelho;
 	}
 
-	public boolean isLibAutomatica() {
+	public String isLibAutomatica() {
 		return libAutomatica;
 	}
 
-	public void setLibAutomatica(boolean libAutomatica) {
+	public void setLibAutomatica(String libAutomatica) {
 		this.libAutomatica = libAutomatica;
 	}
 
