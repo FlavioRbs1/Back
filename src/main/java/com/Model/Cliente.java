@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +46,7 @@ public class Cliente {
 
     @Column(updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dtNasc;
+    private LocalDate dtNasc;
 
     @Column( length = 100)
     private String empresa;
@@ -145,11 +146,11 @@ public class Cliente {
 		this.dependentes = dependentes;
 	}
 
-	public Date getDtNasc() {
+	public LocalDate getDtNasc() {
 		return dtNasc;
 	}
 
-	public void setDtNasc(Date dtNasc) {
+	public void setDtNasc(LocalDate dtNasc) {
 		this.dtNasc = dtNasc;
 	}
 

@@ -1,6 +1,7 @@
 package com.Model;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class Analise {
 	
 	@Column
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date dataAnalise;
+	private LocalDate dataAnalise;
 	
 	@Column(length = 3)
 	private Integer analiseCpf;
@@ -71,8 +72,8 @@ public class Analise {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setCliente(Cliente integer) {
+		this.cliente = integer;
 	}
 
 	public Pedidos getPedido() {
@@ -83,12 +84,12 @@ public class Analise {
 		this.pedido = pedido;
 	}
 
-	public Date getDataAnalise() {
+	public LocalDate getDataAnalise() {
 		return dataAnalise;
 	}
 
-	public void setDataAnalise(Date dataAnalise) {
-		this.dataAnalise = dataAnalise;
+	public void setDataAnalise(LocalDate data) {
+		this.dataAnalise = data;
 	}
 
 	public Integer getAnaliseCpf() {

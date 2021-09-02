@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,43 +27,63 @@ public class Metrica {
 	private Integer id;
 	
 	@Column(length = 15 )
-	private String analiseCpf;
+	private BigDecimal cpfVermelho;
 	
 	@Column(length = 15 )
-	private String analiseEstCivil;
+	private BigDecimal cpfAmarelo;
 	
 	@Column(length = 15 )
-	private String analiseIdade;
+	private BigDecimal cpfVerde;
 	
 	@Column(length = 15 )
-	private String analisePercEndiv;
+	private BigDecimal cpfAzul;
 	
 	@Column(length = 15 )
-	private String analiseProfissao;
+	private BigDecimal idadeVermelho;
 	
 	@Column(length = 15 )
-	private String analiseRenda;
+	private BigDecimal idadeAmarelo;
+
+	@Column(length = 15 )
+	private BigDecimal idadeVerde;
 	
 	@Column(length = 50 )
-	private BigDecimal classAmarelo;
+	private BigDecimal idadeAzul;
 	
 	@Column(length = 50 )
-	private BigDecimal classAzul;
+	private BigDecimal limiteCredito;
 	
 	@Column(length = 50 )
-	private BigDecimal classVerde;
+	private BigDecimal comprasAbertoVermelho;
+	
+	@Column(length = 50 )
+	private BigDecimal comprasAbertoAmarelo;
+	
+	@Column(length = 15 )
+	private BigDecimal rendaVermelho;
+	
+	@Column(length = 15 )
+	private BigDecimal rendaAmarelo;
+	
+	@Column(length = 50 )
+	private BigDecimal rendaVerde;
+	
+	@Column(length = 50 )
+	private BigDecimal rendaAzul;
+	
+	@Column(length = 50 )
+	private BigDecimal percentual;
 	
 	@Column(length = 50 )
 	private BigDecimal classVermelho;
 	
 	@Column(length = 10 )
-	private String libAutomatica;
-	
+	private BigDecimal classAmarelo;
 	@Column(length = 50 )
-	private BigDecimal limiteCredito;
+	private BigDecimal classVerde;
 	
 	@Column(length = 3)
-	private Integer percentual;
+	private Integer classAzul;
 
 	public Integer getId() {
 		return id;
@@ -71,92 +93,60 @@ public class Metrica {
 		this.id = id;
 	}
 
-	public String isAnaliseCpf() {
-		return analiseCpf;
+	public BigDecimal getCpfVermelho() {
+		return cpfVermelho;
 	}
 
-	public void setAnaliseCpf(String analiseCpf) {
-		this.analiseCpf = analiseCpf;
+	public void setCpfVermelho(BigDecimal cpfVermelho) {
+		this.cpfVermelho = cpfVermelho;
 	}
 
-	public String isAnaliseEstCivil() {
-		return analiseEstCivil;
+	public BigDecimal getCpfAmarelo() {
+		return cpfAmarelo;
 	}
 
-	public void setAnaliseEstCivil(String analiseEstCivil) {
-		this.analiseEstCivil = analiseEstCivil;
+	public void setCpfAmarelo(BigDecimal cpfAmarelo) {
+		this.cpfAmarelo = cpfAmarelo;
 	}
 
-	public String isAnaliseIdade() {
-		return analiseIdade;
+	public BigDecimal getCpfVerde() {
+		return cpfVerde;
 	}
 
-	public void setAnaliseIdade(String analiseIdade) {
-		this.analiseIdade = analiseIdade;
+	public void setCpfVerde(BigDecimal cpfVerde) {
+		this.cpfVerde = cpfVerde;
 	}
 
-	public String isAnalisePercEndiv() {
-		return analisePercEndiv;
+	public BigDecimal getCpfAzul() {
+		return cpfAzul;
 	}
 
-	public void setAnalisePercEndiv(String analisePercEndiv) {
-		this.analisePercEndiv = analisePercEndiv;
+	public void setCpfAzul(BigDecimal cpfAzul) {
+		this.cpfAzul = cpfAzul;
 	}
 
-	public String isAnaliseProfissao() {
-		return analiseProfissao;
+	public BigDecimal getIdadeVermelho() {
+		return idadeVermelho;
 	}
 
-	public void setAnaliseProfissao(String analiseProfissao) {
-		this.analiseProfissao = analiseProfissao;
+	public void setIdadeVermelho(BigDecimal idadeVermelho) {
+		this.idadeVermelho = idadeVermelho;
 	}
 
-	public String isAnaliseRenda() {
-		return analiseRenda;
+	public BigDecimal getIdadeVerde() {
+		return idadeVerde;
 	}
 
-	public void setAnaliseRenda(String analiseRenda) {
-		this.analiseRenda = analiseRenda;
+	public void setIdadeVerde(BigDecimal idadeVerde) {
+		this.idadeVerde = idadeVerde;
 	}
 
-	public BigDecimal getClassAmarelo() {
-		return classAmarelo;
+	public BigDecimal getIdadeAzul() {
+		return idadeAzul;
 	}
 
-	public void setClassAmarelo(BigDecimal classAmarelo) {
-		this.classAmarelo = classAmarelo;
-	}
-
-	public BigDecimal getClassAzul() {
-		return classAzul;
-	}
-
-	public void setClassAzul(BigDecimal classAzul) {
-		this.classAzul = classAzul;
-	}
-
-	public BigDecimal getClassVerde() {
-		return classVerde;
-	}
-
-	public void setClassVerde(BigDecimal classVerde) {
-		this.classVerde = classVerde;
-	}
-
-	public BigDecimal getClassVermelho() {
-		return classVermelho;
-	}
-
-	public void setClassVermelho(BigDecimal classVermelho) {
-		this.classVermelho = classVermelho;
-	}
-
-	public String isLibAutomatica() {
-		return libAutomatica;
-	}
-
-	public void setLibAutomatica(String libAutomatica) {
-		this.libAutomatica = libAutomatica;
+	public void setIdadeAzul(BigDecimal idadeAzul) {
+		this.idadeAzul = idadeAzul;
 	}
 
 	public BigDecimal getLimiteCredito() {
@@ -167,13 +157,100 @@ public class Metrica {
 		this.limiteCredito = limiteCredito;
 	}
 
-	public Integer getPercentual() {
+	public BigDecimal getComprasAbertoVermelho() {
+		return comprasAbertoVermelho;
+	}
+
+	public void setComprasAbertoVermelho(BigDecimal comprasAbertoVermelho) {
+		this.comprasAbertoVermelho = comprasAbertoVermelho;
+	}
+
+	public BigDecimal getComprasAbertoAmarelo() {
+		return comprasAbertoAmarelo;
+	}
+
+	public void setComprasAbertoAmarelo(BigDecimal comprasAbertoAmarelo) {
+		this.comprasAbertoAmarelo = comprasAbertoAmarelo;
+	}
+
+	public BigDecimal getRendaVermelho() {
+		return rendaVermelho;
+	}
+
+	public void setRendaVermelho(BigDecimal rendaVermelho) {
+		this.rendaVermelho = rendaVermelho;
+	}
+
+	public BigDecimal getRendaAmarelo() {
+		return rendaAmarelo;
+	}
+
+	public void setRendaAmarelo(BigDecimal rendaAmarelo) {
+		this.rendaAmarelo = rendaAmarelo;
+	}
+
+	public BigDecimal getRendaVerde() {
+		return rendaVerde;
+	}
+
+	public void setRendaVerde(BigDecimal rendaVerde) {
+		this.rendaVerde = rendaVerde;
+	}
+
+	public BigDecimal getRendaAzul() {
+		return rendaAzul;
+	}
+
+	public void setRendaAzul(BigDecimal rendaAzul) {
+		this.rendaAzul = rendaAzul;
+	}
+
+	public BigDecimal getPercentual() {
 		return percentual;
 	}
 
-	public void setPercentual(Integer percentual) {
+	public void setPercentual(BigDecimal percentual) {
 		this.percentual = percentual;
 	}
-	
+
+	public BigDecimal getClassVermelho() {
+		return classVermelho;
+	}
+
+	public void setClassVermelho(BigDecimal classVermelho) {
+		this.classVermelho = classVermelho;
+	}
+
+	public BigDecimal getClassAmarelo() {
+		return classAmarelo;
+	}
+
+	public void setClassAmarelo(BigDecimal classAmarelo) {
+		this.classAmarelo = classAmarelo;
+	}
+
+	public BigDecimal getClassVerde() {
+		return classVerde;
+	}
+
+	public void setClassVerde(BigDecimal classVerde) {
+		this.classVerde = classVerde;
+	}
+
+	public Integer getClassAzul() {
+		return classAzul;
+	}
+
+	public void setClassAzul(Integer classAzul) {
+		this.classAzul = classAzul;
+	}
+
+	public BigDecimal getIdadeAmarelo() {
+		return idadeAmarelo;
+	}
+
+	public void setIdadeAmarelo(BigDecimal idadeAmarelo) {
+		this.idadeAmarelo = idadeAmarelo;
+	}
 	
 }

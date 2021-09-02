@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,7 +25,7 @@ public class Pedidos {
 
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dia;
+    private LocalDate dia;
     
     @Column
     private String formaPagamento;
@@ -50,11 +51,11 @@ public class Pedidos {
 		this.id = id;
 	}
 
-	public Date getDia() {
+	public LocalDate getDia() {
 		return dia;
 	}
 
-	public void setDia(Date dia) {
+	public void setDia(LocalDate dia) {
 		this.dia = dia;
 	}
 

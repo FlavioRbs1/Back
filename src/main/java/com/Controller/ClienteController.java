@@ -34,6 +34,11 @@ public class ClienteController {
 		return ResponseEntity.ok(repository.findByCpf(cpf));
 		
 	}
+	@GetMapping(value = "/buscaid/{id}")
+	public ResponseEntity<Object> buscaId(@PathVariable(name="id",required = false) Integer id){
+		return ResponseEntity.ok(repository.findById(id));
+	}
+	
 	@PutMapping (value = "/busca/{cpf}")
 	public Cliente replace(@PathVariable String cpf,@RequestBody Cliente cliente) {
 		return repository.save(cliente);
