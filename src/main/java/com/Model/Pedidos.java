@@ -43,6 +43,7 @@ public class Pedidos {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+    
 	public Integer getId() {
 		return id;
 	}

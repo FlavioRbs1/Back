@@ -21,6 +21,10 @@ public class Inadimplencias {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedidos pedido;
+    
+    @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
@@ -30,6 +34,7 @@ public class Inadimplencias {
     @Column
     private BigDecimal abertoTotal; //Valor em aberto vencidos e não vencidos
 
+    
 	public Integer getId() {
 		return id;
 	}

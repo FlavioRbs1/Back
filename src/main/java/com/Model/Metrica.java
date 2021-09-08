@@ -26,64 +26,66 @@ public class Metrica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(length = 15 )
-	private BigDecimal cpfVermelho;
+	@Column(length = 10 )
+	private BigDecimal classAmarelo;
+
+	@Column(length = 3)
+	private Integer classAzul;
+	
+	@Column(length = 50 )
+	private BigDecimal classVerde;
+
+	@Column(length = 50 )
+	private BigDecimal classVermelho;
+	
+	@Column(length = 50 )
+	private BigDecimal comprasAbertoAmarelo;
+	
+	@Column(length = 50 )
+	private BigDecimal comprasAbertoVermelho;
 	
 	@Column(length = 15 )
 	private BigDecimal cpfAmarelo;
 	
 	@Column(length = 15 )
-	private BigDecimal cpfVerde;
-	
-	@Column(length = 15 )
 	private BigDecimal cpfAzul;
 	
 	@Column(length = 15 )
-	private BigDecimal idadeVermelho;
+	private BigDecimal cpfVerde;
+	
+	@Column(length = 15 )
+	private BigDecimal cpfVermelho;
 	
 	@Column(length = 15 )
 	private BigDecimal idadeAmarelo;
-
-	@Column(length = 15 )
-	private BigDecimal idadeVerde;
 	
 	@Column(length = 50 )
 	private BigDecimal idadeAzul;
 	
-	@Column(length = 50 )
-	private BigDecimal limiteCredito;
-	
-	@Column(length = 50 )
-	private BigDecimal comprasAbertoVermelho;
-	
-	@Column(length = 50 )
-	private BigDecimal comprasAbertoAmarelo;
+	@Column(length = 15 )
+	private BigDecimal idadeVerde;
 	
 	@Column(length = 15 )
-	private BigDecimal rendaVermelho;
+	private BigDecimal idadeVermelho;
+	
+	@Column(length = 50 )
+	private BigDecimal limiteCredito;
+
+	@Column(length = 50 )
+	private BigDecimal percentual;
 	
 	@Column(length = 15 )
 	private BigDecimal rendaAmarelo;
 	
 	@Column(length = 50 )
-	private BigDecimal rendaVerde;
-	
-	@Column(length = 50 )
 	private BigDecimal rendaAzul;
 	
 	@Column(length = 50 )
-	private BigDecimal percentual;
+	private BigDecimal rendaVerde;
 	
-	@Column(length = 50 )
-	private BigDecimal classVermelho;
+	@Column(length = 15 )
+	private BigDecimal rendaVermelho;
 	
-	@Column(length = 10 )
-	private BigDecimal classAmarelo;
-	@Column(length = 50 )
-	private BigDecimal classVerde;
-	
-	@Column(length = 3)
-	private Integer classAzul;
 
 	public Integer getId() {
 		return id;

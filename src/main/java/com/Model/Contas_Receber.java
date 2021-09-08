@@ -49,8 +49,6 @@ public class Contas_Receber {
     @Column
     private BigDecimal abertoAtraso;
 
-    @Column
-    private BigDecimal totalAberto;
 
 	public Integer getId() {
 		return id;
@@ -124,13 +122,5 @@ public class Contas_Receber {
 		this.abertoAtraso = abertoAtraso;
 	}
 
-	public BigDecimal getTotalAberto() {
-		return totalAberto;
-	}
-
-	public void setTotalAberto(BigDecimal totalAberto) {
-		this.totalAberto = totalAberto;
-	}
-    
     
 }

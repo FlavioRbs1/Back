@@ -35,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AnaliseController {
 	
+	Analise a = new Analise();
 	private final AnaliseRepository repository;
 	private final ClienteRepository clienteRepository;
 	private final PedidosRepository pedidosRepository;
@@ -52,7 +53,7 @@ public class AnaliseController {
 	public Analise save(@RequestBody AnaliseDTO dto) {
 		Analise analise = new Analise();
 		
-		analise.setAnaliseCpf(dto.getAnaliseCpf());
+		;
 		analise.setAnaliseEstCivil(dto.getAnaliseEstCivil());
 		analise.setAnaliseIdade(dto.getAnaliseIdade());
 		analise.setAnalisePerc(dto.getAnalisePerc());
@@ -72,9 +73,12 @@ public class AnaliseController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pedido inesistennte"));
 		analise.setPedido(pedidos);
 		
+		
 		return repository.save(analise);
 	}
 	
+	
+
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Object> busca(@PathVariable Integer id){
 		return ResponseEntity.ok(repository.findById(id));

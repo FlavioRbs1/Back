@@ -13,6 +13,7 @@ public class AnaliseDTO {
 	private String situacao;
 	private Integer idCliente;
 	private Integer idPedido;
+	Regras r = new Regras();
 	
 	public Integer getAnaliseCpf() {
 		return analiseCpf;
@@ -24,7 +25,11 @@ public class AnaliseDTO {
 		return analiseEstCivil;
 	}
 	public void setAnaliseEstCivil(Integer analiseEstCivil) {
-		this.analiseEstCivil = analiseEstCivil;
+		this.analiseEstCivil = analiseEstCivil(analiseEstCivil);
+	}
+	private Integer analiseEstCivil(Integer analiseEstCivil) {
+		analiseEstCivil = 88 + 9;
+		return analiseEstCivil;
 	}
 	public Integer getAnaliseIdade() {
 		return analiseIdade;
