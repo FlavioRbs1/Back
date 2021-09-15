@@ -1,42 +1,46 @@
 package com.DTO;
 
+import java.math.BigDecimal;
+
 public class AnaliseDTO {
 
 	private Integer analiseCpf;
-	private Integer analiseEstCivil;
-	private Integer analiseIdade;
+	private Integer analisePendencias;
+
 	private Integer analisePerc;
 	private Integer analiseProfissao;
-	private Integer analiseRenda;
+	private BigDecimal analiseRenda;
 	private String concessao;
 	private String dataAnalise;
 	private String situacao;
 	private Integer idCliente;
 	private Integer idPedido;
-	Regras r = new Regras();
 	
+	public Integer getCliente() {
+		return idCliente;
+	}
+	public void setCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+	public Integer getPedido() {
+		return idPedido;
+	}
+	public void setPedido(Integer idPedido) {
+		this.idPedido = idPedido;
+	}
 	public Integer getAnaliseCpf() {
 		return analiseCpf;
 	}
 	public void setAnaliseCpf(Integer analiseCpf) {
 		this.analiseCpf = analiseCpf;
 	}
-	public Integer getAnaliseEstCivil() {
-		return analiseEstCivil;
+	public Integer getanalisePendencias() {
+		return analisePendencias;
 	}
-	public void setAnaliseEstCivil(Integer analiseEstCivil) {
-		this.analiseEstCivil = analiseEstCivil(analiseEstCivil);
+	public void setAnaliseEstCivil(Integer analisePendencias) {
+		this.analisePendencias = idCliente;
 	}
-	private Integer analiseEstCivil(Integer analiseEstCivil) {
-		analiseEstCivil = 88 + 9;
-		return analiseEstCivil;
-	}
-	public Integer getAnaliseIdade() {
-		return analiseIdade;
-	}
-	public void setAnaliseIdade(Integer analiseIdade) {
-		this.analiseIdade = analiseIdade;
-	}
+	
 	public Integer getAnalisePerc() {
 		return analisePerc;
 	}
@@ -49,10 +53,10 @@ public class AnaliseDTO {
 	public void setAnaliseProfissao(Integer analiseProfissao) {
 		this.analiseProfissao = analiseProfissao;
 	}
-	public Integer getAnaliseRenda() {
+	public BigDecimal getAnaliseRenda() {
 		return analiseRenda;
 	}
-	public void setAnaliseRenda(Integer analiseRenda) {
+	public void setAnaliseRenda(BigDecimal analiseRenda) {
 		this.analiseRenda = analiseRenda;
 	}
 	public String getConcessao() {
@@ -72,18 +76,6 @@ public class AnaliseDTO {
 	}
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
-	}
-	public Integer getCliente() {
-		return idCliente;
-	}
-	public void setCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
-	public Integer getPedido() {
-		return idPedido;
-	}
-	public void setPedido(Integer idPedido) {
-		this.idPedido = idPedido;
 	}
 	
 	

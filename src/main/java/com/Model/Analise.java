@@ -1,6 +1,7 @@
 package com.Model;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -19,6 +20,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Analise {
+	
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +43,7 @@ public class Analise {
 	private Integer analiseCpf;
 	
 	@Column(length = 3)
-	private Integer analiseEstCivil;
+	private Integer analisePendencias;
 	
 	@Column(length = 3)
 	private Integer analiseIdade;
@@ -96,25 +99,19 @@ public class Analise {
 		return analiseCpf;
 	}
 
+
 	public void setAnaliseCpf(Integer analiseCpf) {
 		this.analiseCpf = analiseCpf;
 	}
 
-	public Integer getAnaliseEstCivil() {
-		return analiseEstCivil;
+	public Integer getanalisePendencias() {
+		return analisePendencias;
 	}
 
-	public void setAnaliseEstCivil(Integer analiseEstCivil) {
-		this.analiseEstCivil = analiseEstCivil;
+	public void setanalisePendencias(Integer analisePendencias) {
+		this.analisePendencias = analisePendencias;
 	}
 
-	public Integer getAnaliseIdade() {
-		return analiseIdade;
-	}
-
-	public void setAnaliseIdade(Integer analiseIdade) {
-		this.analiseIdade = analiseIdade;
-	}
 
 	public Integer getAnaliseProfissao() {
 		return analiseProfissao;

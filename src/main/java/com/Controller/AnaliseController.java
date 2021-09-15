@@ -23,8 +23,10 @@ import com.Model.Cliente;
 import com.Model.Pedidos;
 import com.Repository.AnaliseRepository;
 import com.Repository.ClienteRepository;
+import com.Repository.InadimplenciasRepository;
+import com.Repository.MetricaRepository;
 import com.Repository.PedidosRepository;
-import com.util.BigDecimalConverter;
+
 
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -39,13 +41,17 @@ public class AnaliseController {
 	private final AnaliseRepository repository;
 	private final ClienteRepository clienteRepository;
 	private final PedidosRepository pedidosRepository;
-	BigDecimalConverter bigDecimalConverter;
+	private final MetricaRepository metricaRepository;
+	private final InadimplenciasRepository inadimplenciasRepository;
+
 	
 	@Autowired
-	public AnaliseController(AnaliseRepository repository,ClienteRepository clienteRepository, PedidosRepository pedidosRepository) {
+	public AnaliseController(MetricaRepository metricaRepository,InadimplenciasRepository inadimplenciasRepository, AnaliseRepository repository,ClienteRepository clienteRepository, PedidosRepository pedidosRepository) {
 		this.repository = repository;
 		this.clienteRepository = clienteRepository;
 		this.pedidosRepository = pedidosRepository;
+		this.inadimplenciasRepository = inadimplenciasRepository;
+		this.metricaRepository = metricaRepository;
 	}
 
 	@PostMapping(value="/save")
@@ -53,32 +59,36 @@ public class AnaliseController {
 	public Analise save(@RequestBody AnaliseDTO dto) {
 		Analise analise = new Analise();
 		
-		;
-		analise.setAnaliseEstCivil(dto.getAnaliseEstCivil());
-		analise.setAnaliseIdade(dto.getAnaliseIdade());
-		analise.setAnalisePerc(dto.getAnalisePerc());
-		analise.setAnaliseProfissao(dto.getAnaliseProfissao());
-		analise.setAnaliseRenda(dto.getAnaliseRenda());
-		analise.setConcessao(dto.getConcessao());
-		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		analise.setDataAnalise(data);
-		analise.setSituacao(dto.getSituacao());
 		Integer idCliente = dto.getCliente();
 		Cliente cliente= clienteRepository.findById(idCliente)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cliente inexistente"));
 		analise.setCliente(cliente);
-
+		
 		Integer idPedido = dto.getPedido();
 		Pedidos pedidos = pedidosRepository.findById(idPedido)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pedido inesistennte"));
 		analise.setPedido(pedidos);
+		
+		analise.setAnaliseCpf(pedidosRepository.findByPedidoCliente(idCliente));
+		analise.setanalisePendencias(inadimplenciasRepository.findByCliente(idCliente));
+		
+		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido));
+		
+		analise.setAnaliseProfissao(dto.getAnaliseProfissao());
+		
+		
+		analise.setConcessao(dto.getConcessao());
+		
+		
+		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		analise.setDataAnalise(data);
+		analise.setSituacao(dto.getSituacao());
 		
 		
 		return repository.save(analise);
 	}
 	
 	
-
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Object> busca(@PathVariable Integer id){
 		return ResponseEntity.ok(repository.findById(id));
@@ -87,9 +97,27 @@ public class AnaliseController {
 	public List<Analise> obterTodos(){
 		return repository.findAll();
 	}
-	@PutMapping (value="/analise/{id}")
+	@PutMapping (value="/replace/{id}")
 	public Analise replace (@PathVariable Integer id, @RequestBody Analise analise) {
 		return repository.save(analise);
 	}	
+	private Integer verificaPercentual(Integer idCliente, Integer idPedido) {
+		Double valorPedido = pedidosRepository.getValorPedido(idPedido);
+		Integer parcelaPedido = pedidosRepository.getParcelaPedido(idPedido);
+		Double valorParcela = valorPedido/parcelaPedido;
+		
+		Double rendaCliente = clienteRepository.getRenda(idCliente);
+		Double perc = metricaRepository.getPercentual();
+		perc = perc/100;
+		Double percentualRendaClientePedido = rendaCliente*perc; 
+		
+		Integer valor = percentualRendaClientePedido.compareTo(valorParcela);
+		if(valor > 0) {
+			return 100;
+		}else {
+			return 0;
+		}
+
+	}
 	
 }

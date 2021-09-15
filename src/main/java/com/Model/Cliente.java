@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -70,13 +71,13 @@ public class Cliente {
     private String profissao;
 
     @Column( length = 50)
-    private BigDecimal renda;
+    private Double renda;
 
     @Column( length = 50)
-    private BigDecimal rendaFamiliar;
+    private Double rendaFamiliar;
 
     @Column( length = 50)
-    private BigDecimal rendaTotal;
+    private Double rendaTotal;
 
     @Column( length = 15)
     private String rg;
@@ -210,27 +211,27 @@ public class Cliente {
 		this.profissao = profissao;
 	}
 
-	public BigDecimal getRenda() {
+	public Double getRenda() {
 		return renda;
 	}
 
-	public void setRenda(BigDecimal renda) {
+	public void setRenda(Double renda) {
 		this.renda = renda;
 	}
 
-	public BigDecimal getRendaFamiliar() {
+	public Double getRendaFamiliar() {
 		return rendaFamiliar;
 	}
 
-	public void setRendaFamiliar(BigDecimal rendaFamiliar) {
+	public void setRendaFamiliar(Double rendaFamiliar) {
 		this.rendaFamiliar = rendaFamiliar;
 	}
 
-	public BigDecimal getRendaTotal() {
+	public Double getRendaTotal() {
 		return rendaTotal;
 	}
 
-	public void setRendaTotal(BigDecimal rendaTotal) {
+	public void setRendaTotal(Double rendaTotal) {
 		this.rendaTotal = rendaTotal;
 	}
 
