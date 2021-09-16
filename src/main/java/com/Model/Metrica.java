@@ -37,7 +37,7 @@ public class Metrica {
 	private Double classVermelho;
 	
 	@Column(length = 50 )
-	private Double comprasAbertoAmarelo;
+	private Double comprasAbertoAzul;
 	
 	@Column(length = 50 )
 	private Double comprasAbertoVermelho;
@@ -165,12 +165,12 @@ public class Metrica {
 		this.comprasAbertoVermelho = comprasAbertoVermelho;
 	}
 
-	public Double getComprasAbertoAmarelo() {
-		return comprasAbertoAmarelo;
+	public Double getComprasAbertoAzul() {
+		return comprasAbertoAzul;
 	}
 
-	public void setComprasAbertoAmarelo(Double comprasAbertoAmarelo) {
-		this.comprasAbertoAmarelo = comprasAbertoAmarelo;
+	public void setComprasAbertoAzul(Double comprasAbertoAzul) {
+		this.comprasAbertoAzul = comprasAbertoAzul;
 	}
 
 	public Double getRendaVermelho() {

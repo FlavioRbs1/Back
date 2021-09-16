@@ -69,13 +69,13 @@ public class AnaliseController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pedido inesistennte"));
 		analise.setPedido(pedidos);
 		
-		analise.setAnaliseCpf(pedidosRepository.findByPedidoCliente(idCliente));
-		analise.setanalisePendencias(inadimplenciasRepository.findByCliente(idCliente));
+		analise.setAnaliseCpf(realizaAnaliseDoCpf(idCliente)); //FINALIZADO
 		
-		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido));
+		analise.setanalisePendencias(realizaAnalisePendencias(idCliente)); //FINALIZADO
 		
-		analise.setAnaliseProfissao(dto.getAnaliseProfissao());
+		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido)); //FINALIZADO
 		
+			
 		
 		analise.setConcessao(dto.getConcessao());
 		
@@ -87,6 +87,40 @@ public class AnaliseController {
 		
 		return repository.save(analise);
 	}
+	
+	private Integer realizaAnalisePendencias(Integer idCliente) {
+		
+	 Integer qtdPendencias = inadimplenciasRepository.findByCliente(idCliente);
+	 Double azul = metricaRepository.getPendenciasAzul();
+	 Integer aux = azul.intValue();
+	 
+
+	 if(qtdPendencias == aux) {
+		 return 100;
+	 }
+
+		return 0;
+	}
+
+	private Integer realizaAnaliseDoCpf(Integer idCliente) {
+		
+		Double vermelho = metricaRepository.getClassificacaoCpfVermelho();
+		Double verde = metricaRepository.getClassificacaoCpfVerde();
+		Double amarelo = metricaRepository.getClassificacaoCpfAmarelo();
+
+		Integer qtdPedido =	pedidosRepository.findByPedidoCliente(idCliente);
+		Double qtd = Double.valueOf(qtdPedido);
+		
+		if(qtd == vermelho) {
+			return 25;
+			}else if(qtd == amarelo) {
+				return 50;
+				}else if(qtd == verde) {
+					return 75;
+					}
+		return 100;
+	}
+
 	
 	
 	@GetMapping(value="/{id}")
@@ -119,5 +153,7 @@ public class AnaliseController {
 		}
 
 	}
+	
+	
 	
 }

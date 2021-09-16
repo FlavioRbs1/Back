@@ -1,7 +1,6 @@
 package com.Model;
 
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -44,12 +43,6 @@ public class Analise {
 	
 	@Column(length = 3)
 	private Integer analisePendencias;
-	
-	@Column(length = 3)
-	private Integer analiseIdade;
-	
-	@Column(length = 3)
-	private Integer analiseProfissao;
 	
 	@Column(length = 3)
 	private Integer analiseRenda;
@@ -110,15 +103,6 @@ public class Analise {
 
 	public void setanalisePendencias(Integer analisePendencias) {
 		this.analisePendencias = analisePendencias;
-	}
-
-
-	public Integer getAnaliseProfissao() {
-		return analiseProfissao;
-	}
-
-	public void setAnaliseProfissao(Integer analiseProfissao) {
-		this.analiseProfissao = analiseProfissao;
 	}
 
 	public Integer getAnaliseRenda() {
