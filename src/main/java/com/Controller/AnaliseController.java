@@ -27,7 +27,6 @@ import com.Repository.InadimplenciasRepository;
 import com.Repository.MetricaRepository;
 import com.Repository.PedidosRepository;
 
-
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -36,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class AnaliseController {
-	
+
 	Analise a = new Analise();
 	private final AnaliseRepository repository;
 	private final ClienteRepository clienteRepository;
@@ -44,7 +43,7 @@ public class AnaliseController {
 	private final MetricaRepository metricaRepository;
 	private final InadimplenciasRepository inadimplenciasRepository;
 
-	
+
 	@Autowired
 	public AnaliseController(MetricaRepository metricaRepository,InadimplenciasRepository inadimplenciasRepository, AnaliseRepository repository,ClienteRepository clienteRepository, PedidosRepository pedidosRepository) {
 		this.repository = repository;
@@ -58,71 +57,25 @@ public class AnaliseController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Analise save(@RequestBody AnaliseDTO dto) {
 		Analise analise = new Analise();
-		
 		Integer idCliente = dto.getCliente();
 		Cliente cliente= clienteRepository.findById(idCliente)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cliente inexistente"));
 		analise.setCliente(cliente);
-		
 		Integer idPedido = dto.getPedido();
 		Pedidos pedidos = pedidosRepository.findById(idPedido)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pedido inesistennte"));
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pedido inesistente"));
 		analise.setPedido(pedidos);
-		
-		analise.setAnaliseCpf(realizaAnaliseDoCpf(idCliente)); //FINALIZADO
-		
-		analise.setanalisePendencias(realizaAnalisePendencias(idCliente)); //FINALIZADO
-		
-		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido)); //FINALIZADO
-		
-			
-		
+		analise.setAnaliseCpf(realizaAnaliseDoCpf(idCliente)); 
+		analise.setanalisePendencias(realizaAnalisePendencias(idCliente)); 
+		analise.setAnaliseRenda(realizaAnaliseRenda(idCliente)); 
+		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido)); 
 		analise.setConcessao(dto.getConcessao());
-		
-		
 		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		analise.setDataAnalise(data);
 		analise.setSituacao(dto.getSituacao());
-		
-		
 		return repository.save(analise);
 	}
-	
-	private Integer realizaAnalisePendencias(Integer idCliente) {
-		
-	 Integer qtdPendencias = inadimplenciasRepository.findByCliente(idCliente);
-	 Double azul = metricaRepository.getPendenciasAzul();
-	 Integer aux = azul.intValue();
-	 
 
-	 if(qtdPendencias == aux) {
-		 return 100;
-	 }
-
-		return 0;
-	}
-
-	private Integer realizaAnaliseDoCpf(Integer idCliente) {
-		
-		Double vermelho = metricaRepository.getClassificacaoCpfVermelho();
-		Double verde = metricaRepository.getClassificacaoCpfVerde();
-		Double amarelo = metricaRepository.getClassificacaoCpfAmarelo();
-
-		Integer qtdPedido =	pedidosRepository.findByPedidoCliente(idCliente);
-		Double qtd = Double.valueOf(qtdPedido);
-		
-		if(qtd == vermelho) {
-			return 25;
-			}else if(qtd == amarelo) {
-				return 50;
-				}else if(qtd == verde) {
-					return 75;
-					}
-		return 100;
-	}
-
-	
-	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Object> busca(@PathVariable Integer id){
 		return ResponseEntity.ok(repository.findById(id));
@@ -135,25 +88,76 @@ public class AnaliseController {
 	public Analise replace (@PathVariable Integer id, @RequestBody Analise analise) {
 		return repository.save(analise);
 	}	
+
+	private Integer realizaAnaliseDoCpf(Integer idCliente) {
+
+		Double vermelho = metricaRepository.getClassificacaoCpfVermelho();
+		Double verde = metricaRepository.getClassificacaoCpfVerde();
+		Double amarelo = metricaRepository.getClassificacaoCpfAmarelo();
+
+		Integer qtdPedido =	pedidosRepository.findByPedidoCliente(idCliente);
+		Double qtd = Double.valueOf(qtdPedido);
+
+		if(qtd == vermelho) {
+			return 25;
+		}else if(qtd == amarelo) {
+			return 50;
+		}else if(qtd == verde) {
+			return 75;
+		}
+		return 100;
+	}
+
+
+	private Integer realizaAnalisePendencias(Integer idCliente) {
+
+		Integer qtdPendencias = inadimplenciasRepository.findByCliente(idCliente);
+		Double azul = metricaRepository.getPendenciasAzul();
+		Integer aux = azul.intValue();
+
+		if(qtdPendencias == aux) {
+			return 100;
+		}
+
+		return 0;
+	}
+
+	private Integer realizaAnaliseRenda(Integer idCliente) {
+
+		Double rendaCliente = clienteRepository.getRenda(idCliente);
+		Double rendaAzul = metricaRepository.rendaAzul();
+		Double rendaAmarelo = metricaRepository.rendaAmarelo();
+		Double rendaVerde= metricaRepository.rendaVerde();
+		Double rendaVermelho = metricaRepository.rendaVermelho();
+
+		if(rendaCliente <= rendaVermelho) {
+			return 0;
+		}else if(rendaCliente > rendaVermelho && rendaCliente <= rendaAmarelo) {
+			return 25;
+		}else if(rendaCliente > rendaAmarelo && rendaCliente <= rendaVerde) {
+			return 50;
+		}else if(rendaCliente > rendaVerde && rendaCliente <= rendaAzul) {
+			return 75;
+		}
+		return 100;
+	}
+
 	private Integer verificaPercentual(Integer idCliente, Integer idPedido) {
 		Double valorPedido = pedidosRepository.getValorPedido(idPedido);
 		Integer parcelaPedido = pedidosRepository.getParcelaPedido(idPedido);
 		Double valorParcela = valorPedido/parcelaPedido;
-		
+
 		Double rendaCliente = clienteRepository.getRenda(idCliente);
 		Double perc = metricaRepository.getPercentual();
 		perc = perc/100;
 		Double percentualRendaClientePedido = rendaCliente*perc; 
-		
+
 		Integer valor = percentualRendaClientePedido.compareTo(valorParcela);
 		if(valor > 0) {
 			return 100;
 		}else {
 			return 0;
 		}
-
 	}
-	
-	
-	
+
 }
