@@ -1,21 +1,28 @@
 package com.DTO;
 
-import java.math.BigDecimal;
+
 
 public class AnaliseDTO {
 
+	private Integer id;
 	private Integer analiseCpf;
 	private Integer analisePendencias;
-
 	private Integer analisePerc;
-	private Integer analiseProfissao;
-	private BigDecimal analiseRenda;
+	private Integer analiseRenda;
 	private String concessao;
 	private String dataAnalise;
 	private String situacao;
 	private Integer idCliente;
 	private Integer idPedido;
 	
+	
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public Integer getCliente() {
 		return idCliente;
 	}
@@ -38,7 +45,7 @@ public class AnaliseDTO {
 		return analisePendencias;
 	}
 	public void setAnaliseEstCivil(Integer analisePendencias) {
-		this.analisePendencias = idCliente;
+		this.analisePendencias = analisePendencias;
 	}
 	
 	public Integer getAnalisePerc() {
@@ -47,16 +54,11 @@ public class AnaliseDTO {
 	public void setAnalisePerc(Integer analisePerc) {
 		this.analisePerc = analisePerc;
 	}
-	public Integer getAnaliseProfissao() {
-		return analiseProfissao;
-	}
-	public void setAnaliseProfissao(Integer analiseProfissao) {
-		this.analiseProfissao = analiseProfissao;
-	}
-	public BigDecimal getAnaliseRenda() {
+	
+	public Integer getAnaliseRenda() {
 		return analiseRenda;
 	}
-	public void setAnaliseRenda(BigDecimal analiseRenda) {
+	public void setAnaliseRenda(Integer analiseRenda) {
 		this.analiseRenda = analiseRenda;
 	}
 	public String getConcessao() {
@@ -77,6 +79,5 @@ public class AnaliseDTO {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-	
-	
+
 }

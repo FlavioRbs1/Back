@@ -15,7 +15,6 @@ public interface MetricaRepository extends JpaRepository<Metrica,Integer> {
 	@Query(value="SELECT m.percentual from Metrica as m where id=1")
 	public Double getPercentual();
 	
-	
 	@Query(value="SELECT m.cpfVermelho from Metrica as m where id=1")
 	public Double getClassificacaoCpfVermelho();
 	

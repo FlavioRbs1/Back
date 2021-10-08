@@ -11,10 +11,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,11 +30,11 @@ public class Analise {
 	
 	@ManyToOne
 	@JoinColumn(name ="id_cliente")
-	private Cliente cliente;
+	private Cliente idCliente;
 	
 	@ManyToOne
 	@JoinColumn(name ="id_pedidos")
-	private Pedidos pedido;
+	private Pedidos idPedido;
 	
 	@Column
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -64,44 +66,43 @@ public class Analise {
 		this.id = id;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Cliente getIdCliente() {
+		return idCliente;
 	}
 
-	public void setCliente(Cliente integer) {
-		this.cliente = integer;
+	public void setIdCliente(Cliente idCliente) {
+		this.idCliente = idCliente;
 	}
 
-	public Pedidos getPedido() {
-		return pedido;
+	public Pedidos getIdPedido() {
+		return idPedido;
 	}
 
-	public void setPedido(Pedidos pedido) {
-		this.pedido = pedido;
+	public void setIdPedido(Pedidos idPedido) {
+		this.idPedido = idPedido;
 	}
 
 	public LocalDate getDataAnalise() {
 		return dataAnalise;
 	}
 
-	public void setDataAnalise(LocalDate data) {
-		this.dataAnalise = data;
+	public void setDataAnalise(LocalDate dataAnalise) {
+		this.dataAnalise = dataAnalise;
 	}
 
 	public Integer getAnaliseCpf() {
 		return analiseCpf;
 	}
 
-
 	public void setAnaliseCpf(Integer analiseCpf) {
 		this.analiseCpf = analiseCpf;
 	}
 
-	public Integer getanalisePendencias() {
+	public Integer getAnalisePendencias() {
 		return analisePendencias;
 	}
 
-	public void setanalisePendencias(Integer analisePendencias) {
+	public void setAnalisePendencias(Integer analisePendencias) {
 		this.analisePendencias = analisePendencias;
 	}
 
@@ -136,6 +137,7 @@ public class Analise {
 	public void setConcessao(String concessao) {
 		this.concessao = concessao;
 	}
+
 	
-	
+
 }

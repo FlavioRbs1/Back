@@ -1,4 +1,6 @@
 package com.Controller;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +37,14 @@ public class ClienteController {
 		
 	}
 	@GetMapping(value = "/buscaid/{id}")
-	public ResponseEntity<Object> buscaId(@PathVariable(name="id",required = false) Integer id){
-		return ResponseEntity.ok(repository.findById(id));
+	public Cliente buscaId(@PathVariable(name="id",required = false) Integer id){
+		return  repository.buscaId(id);
 	}
-	
-	
+
+	@GetMapping(value ="/buscarenda/{id}")
+	public Double getRenda(@PathVariable(name="id",required = false) Integer id) {
+		return repository.getRenda(id);
+	}
 	@PutMapping (value = "/busca/{cpf}")
 	public Cliente replace(@PathVariable String cpf,@RequestBody Cliente cliente) {
 		return repository.save(cliente);
