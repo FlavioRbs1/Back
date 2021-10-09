@@ -20,14 +20,14 @@ public interface PedidosRepository extends JpaRepository<Pedidos,Integer> {
 	@Query(value="SELECT id from Pedidos where id_cliente = :idCliente  and situacao = 'CREDITO'")
 	public Integer findByPedidoCliente(Integer idCliente);
 	
-	@Query(value="SELECT p.valor from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
-	public Double getValorPedido(Integer idCliente);
+	@Query(value="SELECT p.valor from Pedidos as p where id = :id")
+	public Double getValorPedido(Integer id);
 	
-	@Query(value="SELECT p.parcelas from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
-	public Integer getParcelaPedido(Integer idCliente);
+	@Query(value="SELECT p.parcelas from Pedidos as p where id = :id")
+	public Integer getParcelaPedido(Integer id);
 
-	@Query(value="SELECT p.id from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
-	public Pedidos findByPedido(Integer idCliente);
+	@Query(value="SELECT p from Pedidos as p where id = :id")
+	public Pedidos findByPedido(Integer id);
 
 	@Query(value="SELECT p.situacao from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
 	public String getSituacaoPedido(Integer idCliente);

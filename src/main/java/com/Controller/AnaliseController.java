@@ -58,17 +58,17 @@ public class AnaliseController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Analise save(@RequestBody AnaliseDTO dto) {
 		Analise analise = new Analise();
-		Integer cliente = dto.getCliente();
-		Cliente c = clienteRepository.buscaId(cliente);
-		System.out.println(cliente);
+		Integer idCliente = dto.getIdCliente();
+		Cliente c = clienteRepository.buscaId(idCliente);
+		System.out.println(idCliente);
 		analise.setIdCliente(c);
-		Integer pedido = dto.getPedido();
-		Pedidos p = pedidosController.buscaPedido(pedido);
+		Integer idPedido = dto.getIdPedido();
+		Pedidos p = pedidosController.buscaPedido(idPedido);
 		analise.setIdPedido(p);
-		analise.setAnaliseCpf(realizaAnaliseDoCpf(cliente)); 
-		analise.setAnalisePendencias(realizaAnalisePendencias(cliente)); 
-		analise.setAnaliseRenda(realizaAnaliseRenda(cliente)); 
-		analise.setAnalisePerc(verificaPercentual(cliente,pedido)); 
+		analise.setAnaliseCpf(realizaAnaliseDoCpf(idCliente)); 
+		analise.setAnalisePendencias(realizaAnalisePendencias(idCliente)); 
+		analise.setAnaliseRenda(realizaAnaliseRenda(idCliente)); 
+		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido)); 
 		analise.setConcessao(dto.getConcessao());
 		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		analise.setDataAnalise(data);
@@ -80,13 +80,13 @@ public class AnaliseController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Analise gerar( AnaliseDTO dto) {
 		Analise analise = new Analise();
-		Integer cliente = dto.getCliente();
-		Cliente c = clienteRepository.buscaId(cliente);
+		Integer idCliente = dto.getIdCliente();
+		Cliente c = clienteRepository.buscaId(idCliente);
 		System.out.println(c);
 		analise.setIdCliente(c);
-		analise.setAnaliseCpf(realizaAnaliseDoCpf(cliente)); 
-		analise.setAnalisePendencias(realizaAnalisePendencias(cliente)); 
-		analise.setAnaliseRenda(realizaAnaliseRenda(cliente)); 
+		analise.setAnaliseCpf(realizaAnaliseDoCpf(idCliente)); 
+		analise.setAnalisePendencias(realizaAnalisePendencias(idCliente)); 
+		analise.setAnaliseRenda(realizaAnaliseRenda(idCliente)); 
 		analise.setAnalisePerc(100); 
 		analise.setConcessao(dto.getConcessao());
 		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));

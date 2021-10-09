@@ -14,26 +14,11 @@ public class AnaliseDTO {
 	private String situacao;
 	private Integer idCliente;
 	private Integer idPedido;
-	
-	
-
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Integer getCliente() {
-		return idCliente;
-	}
-	public void setCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
-	public Integer getPedido() {
-		return idPedido;
-	}
-	public void setPedido(Integer idPedido) {
-		this.idPedido = idPedido;
 	}
 	public Integer getAnaliseCpf() {
 		return analiseCpf;
@@ -41,20 +26,18 @@ public class AnaliseDTO {
 	public void setAnaliseCpf(Integer analiseCpf) {
 		this.analiseCpf = analiseCpf;
 	}
-	public Integer getanalisePendencias() {
+	public Integer getAnalisePendencias() {
 		return analisePendencias;
 	}
-	public void setAnaliseEstCivil(Integer analisePendencias) {
+	public void setAnalisePendencias(Integer analisePendencias) {
 		this.analisePendencias = analisePendencias;
 	}
-	
 	public Integer getAnalisePerc() {
 		return analisePerc;
 	}
 	public void setAnalisePerc(Integer analisePerc) {
 		this.analisePerc = analisePerc;
 	}
-	
 	public Integer getAnaliseRenda() {
 		return analiseRenda;
 	}
@@ -79,5 +62,19 @@ public class AnaliseDTO {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+	public Integer getIdPedido() {
+		return idPedido;
+	}
+	public void setIdPedido(Integer idPedido) {
+		this.idPedido = idPedido;
+	}
+	
+	
 
 }

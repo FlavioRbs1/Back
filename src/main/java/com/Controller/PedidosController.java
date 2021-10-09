@@ -29,14 +29,14 @@ public class PedidosController {
 	public Integer buscaPedidoCliente(@PathVariable (name="idCliente",required = false) Integer cliente){
 		return repository.findByPedidoCliente(cliente);
 	}
-	@GetMapping(value="/buscavalorpedido/{idCliente}")
-	public Double buscaValorPedido(@PathVariable (name="idCliente",required = false) Integer cliente){
-		return repository.getValorPedido(cliente);
+	@GetMapping(value="/buscavalorpedido/{id}")
+	public Double buscaValorPedido(@PathVariable (name="id",required = false) Integer id){
+		return repository.getValorPedido(id);
 	}
 	
-	@GetMapping(value="/buscaparcelapedido/{idCliente}")
-	public Integer buscaParcelaPedido(@PathVariable (name="idCliente",required = false) Integer cliente){
-		return repository.getParcelaPedido(cliente);
+	@GetMapping(value="/buscaparcelapedido/{id}")
+	public Integer buscaParcelaPedido(@PathVariable (name="id",required = false) Integer id){
+		return repository.getParcelaPedido(id);
 	}
 	@GetMapping(value="/buscasituacaopedido/{idCliente}")
 	public String buscaSituacaoPedido(@PathVariable (name="idCliente",required = false) Integer cliente){
@@ -51,9 +51,9 @@ public class PedidosController {
 		System.out.println(cliente);
 		return repository.buscaFormaPedido(cliente);
 	}
-	@GetMapping(value="/buscapedido/{idCliente}")
-	public Pedidos buscaPedido(@PathVariable (name="idCliente",required = false) Integer cliente){
-		return repository.findByPedido(cliente);
+	@GetMapping(value="/buscapedido/{id}")
+	public Pedidos buscaPedido(@PathVariable (name="id",required = false) Integer id){
+		return repository.findByPedido(id);
 	}
 	
 }
