@@ -29,9 +29,17 @@ public class PedidosController {
 	public Integer buscaPedidoCliente(@PathVariable (name="idCliente",required = false) Integer cliente){
 		return repository.findByPedidoCliente(cliente);
 	}
-	@GetMapping(value="/buscavalorpedido/{id}")
-	public Double buscaValorPedido(@PathVariable (name="id",required = false) Integer id){
-		return repository.getValorPedido(id);
+	@GetMapping(value="/buscapedidoclienteBack/{idCliente}")
+	public Integer buscaPedidoClienteBack(@PathVariable (name="idCliente",required = false) Integer cliente){
+		return repository.findByPedidoClienteBack(cliente);
+	}
+	@GetMapping(value="/buscavalorpedidoback/{id}")
+	public Double buscaValorPedidoBack(@PathVariable (name="id",required = false) Integer id){
+		return repository.getValorPedidoBack(id);
+	}
+	@GetMapping(value="/buscavalorpedido/{idCliente}")
+	public Double buscaValorPedido(@PathVariable (name="idCliente",required = false) Integer idCliente){
+		return repository.getValorPedido(idCliente);
 	}
 	
 	@GetMapping(value="/buscaparcelapedido/{id}")

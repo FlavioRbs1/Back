@@ -70,8 +70,8 @@ public class AnaliseController {
 		analise.setAnaliseRenda(realizaAnaliseRenda(idCliente)); 
 		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido)); 
 		analise.setConcessao(dto.getConcessao());
-		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		analise.setDataAnalise(data);
+//		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+//		analise.setDataAnalise(data);
 		analise.setSituacao(dto.getSituacao());
 		return repository.save(analise);
 	}
@@ -165,7 +165,7 @@ public class AnaliseController {
 	}
 
 	private Integer verificaPercentual(Integer cliente, Integer pedido) {
-		Double valorPedido = pedidosController.buscaValorPedido(pedido);
+		Double valorPedido = pedidosController.buscaValorPedidoBack(pedido);
 		Integer parcelaPedido = pedidosController.buscaParcelaPedido(pedido);
 		Double valorParcela = valorPedido/parcelaPedido;
 

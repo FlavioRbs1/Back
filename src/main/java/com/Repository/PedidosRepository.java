@@ -17,11 +17,17 @@ public interface PedidosRepository extends JpaRepository<Pedidos,Integer> {
 	@Query(value="SELECT p.parcelas,p.situacao,p.valor from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
 	public Integer buscaPedido(Integer idCliente);
 	
-	@Query(value="SELECT id from Pedidos where id_cliente = :idCliente  and situacao = 'CREDITO'")
+	@Query(value="SELECT COUNT(*) from Pedidos as p where id_cliente = :idCliente")
+	public Integer findByPedidoClienteBack(Integer idCliente);
+	
+	@Query(value="SELECT p.id from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
 	public Integer findByPedidoCliente(Integer idCliente);
 	
+	@Query(value="SELECT p.valor from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
+	public Double getValorPedido(Integer idCliente);
+	
 	@Query(value="SELECT p.valor from Pedidos as p where id = :id")
-	public Double getValorPedido(Integer id);
+	public Double getValorPedidoBack(Integer id);
 	
 	@Query(value="SELECT p.parcelas from Pedidos as p where id = :id")
 	public Integer getParcelaPedido(Integer id);
