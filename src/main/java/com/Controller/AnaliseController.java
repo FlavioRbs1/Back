@@ -70,12 +70,18 @@ public class AnaliseController {
 		analise.setAnaliseRenda(realizaAnaliseRenda(idCliente)); 
 		analise.setAnalisePerc(verificaPercentual(idCliente,idPedido)); 
 		analise.setConcessao(dto.getConcessao());
-//		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-//		analise.setDataAnalise(data);
-		analise.setSituacao(dto.getSituacao());
+		LocalDate data = LocalDate.now();
+		analise.setDataAnalise(data);
+		analise.setScore(geraScore(analise.getAnaliseCpf(),analise.getAnalisePendencias(),analise.getAnaliseRenda(),analise.getAnalisePerc()));
+		analise.setClassificacao(classificaCliente(analise.getScore()));
+		analise.setSituacao(geraSituacao(analise.getClassificacao(),idPedido));
 		return repository.save(analise);
 	}
 
+
+
+
+	
 	@PostMapping(value="/postanalisec")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Analise gerar( AnaliseDTO dto) {
@@ -96,9 +102,9 @@ public class AnaliseController {
 	}
 
 	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<Object> busca(@PathVariable Integer id){
-		return ResponseEntity.ok(repository.findById(id));
+	@GetMapping(value="/{idPedido}/{idCliente}")
+	public ResponseEntity<Object> busca(@PathVariable Integer idPedido, Integer idCliente){
+		return ResponseEntity.ok(repository.findAnaliseByPedidoCliente(idPedido , idCliente));
 	}
 	
 	@GetMapping(value="/lista")
@@ -146,7 +152,6 @@ public class AnaliseController {
 	private Integer realizaAnaliseRenda(Integer cliente) {
 
 		Double rendaCliente = clienteRepository.getRenda(cliente);
-	//	Double rendaCliente = 0.00;
 		Double rendaAzul = metricaController.buscaRendaAzul();
 		Double rendaAmarelo = metricaController.buscaRendaAmarelo();
 		Double rendaVerde= metricaController.buscaRendaVerde();
@@ -166,7 +171,7 @@ public class AnaliseController {
 
 	private Integer verificaPercentual(Integer cliente, Integer pedido) {
 		Double valorPedido = pedidosController.buscaValorPedidoBack(pedido);
-		Integer parcelaPedido = pedidosController.buscaParcelaPedido(pedido);
+		Integer parcelaPedido = pedidosController.buscaParcelaPedidoBack(pedido);
 		Double valorParcela = valorPedido/parcelaPedido;
 
 		Double rendaCliente = clienteRepository.getRenda(cliente);
@@ -180,6 +185,44 @@ public class AnaliseController {
 		}else {
 			return 0;
 		}
+	}
+	
+	private Double geraScore(Integer a, Integer b, Integer c, Integer d) {
+		Double score = (double) ((a+b+c+d)/4);
+		return score;
+	}
+
+	private String classificaCliente(Double score) {
+		Double classeVerde = metricaController.buscaClasseVerde();
+		Double classeAmarelo = metricaController.buscaClasseAmarelo();
+		Double classeVermelho = metricaController.buscaClasseVermelho();
+		String cor;
+		
+		if(score <= classeVermelho) {
+			cor = "VERMELHO";
+			return cor;
+		}else if(score > classeVermelho && score <= classeAmarelo){
+			cor = "AMARELO";
+			return cor;
+		}else if(score > classeAmarelo && score <= classeVerde){
+			cor = "VERDE";
+		}else {
+			cor = "AZUL";
+		}
+		return cor;						
+	}
+	
+	private String geraSituacao(String classificacao, Integer idPedido) {
+		String situacao;
+		if(classificacao == "VERMELHO" || classificacao =="AMARELO") {
+			situacao = "REPROVADO";
+			pedidosController.reprovaPedido(idPedido);
+			
+		}else {
+			situacao = "APROVADO";
+			pedidosController.aprovaPedido(idPedido);
+		}
+		return situacao;
 	}
 
 }

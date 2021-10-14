@@ -14,6 +14,22 @@ public class AnaliseDTO {
 	private String situacao;
 	private Integer idCliente;
 	private Integer idPedido;
+	private Double score;
+	private String classificacao;
+	
+	
+	public String getClassificacao() {
+		return classificacao;
+	}
+	public void setClassificacao(String classificacao) {
+		this.classificacao = classificacao;
+	}
+	public Double getScore() {
+		return score;
+	}
+	public void setScore(Double score) {
+		this.score = score;
+	}
 	public Integer getId() {
 		return id;
 	}

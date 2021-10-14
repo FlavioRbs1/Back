@@ -80,4 +80,25 @@ public class MetricaController {
 		return repository.save(metrica);
 		
 	}
+	
+	@GetMapping(value="/classeAzul")
+	public Double buscaClasseAzul() {
+		return repository.getClassAzul();
+	}
+	
+	@GetMapping(value="/classeVerde")
+	public Double buscaClasseVerde() {
+		return repository.getClassVerde();
+	}
+
+	@GetMapping(value="/classeAmarelo")
+	public Double buscaClasseAmarelo() {
+		return repository.getClassAmarelo();
+	}
+
+	@GetMapping(value="/classeVermelho")
+	public Double buscaClasseVermelho() {
+		return repository.getClassVermelho();
+	}
+	
 }
