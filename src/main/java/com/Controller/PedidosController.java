@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Model.Cliente;
 import com.Model.Pedidos;
 import com.Repository.PedidosRepository;
 
@@ -67,6 +68,10 @@ public class PedidosController {
 	public String buscaFormaPedido(@PathVariable (name="idCliente",required = false) Integer cliente){
 		System.out.println(cliente);
 		return repository.buscaFormaPedido(cliente);
+	}
+	@GetMapping(value="/buscaclientebypedido/{id}")
+	public Cliente buscaClienteByPedido(@PathVariable (name="id",required = false) Integer id){
+		return repository.buscaClientePorPedido(id);
 	}
 	@GetMapping(value="/buscapedido/{id}")
 	public Pedidos buscaPedido(@PathVariable (name="id",required = false) Integer id){

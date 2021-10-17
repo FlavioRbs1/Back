@@ -40,6 +40,10 @@ public class ClienteController {
 	public Cliente buscaId(@PathVariable(name="id",required = false) Integer id){
 		return  repository.buscaId(id);
 	}
+	@GetMapping(value = "/buscacpfporid/{id}")
+	public Cliente buscaCpfById(@PathVariable(name="id",required = false) Integer id){
+		return  repository.buscaCpfById(id);
+	}
 
 	@GetMapping(value ="/buscarenda/{id}")
 	public Double getRenda(@PathVariable(name="id",required = false) Integer id) {

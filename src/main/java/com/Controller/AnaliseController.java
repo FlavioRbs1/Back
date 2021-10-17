@@ -82,22 +82,25 @@ public class AnaliseController {
 
 
 	
-	@PostMapping(value="/postanalisec")
+	@PostMapping(value="/postanalisedecliente")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Analise gerar( AnaliseDTO dto) {
+	public Analise gerar(@RequestBody AnaliseDTO dto) {
 		Analise analise = new Analise();
 		Integer idCliente = dto.getIdCliente();
 		Cliente c = clienteRepository.buscaId(idCliente);
-		System.out.println(c);
+		System.out.println(idCliente);
 		analise.setIdCliente(c);
 		analise.setAnaliseCpf(realizaAnaliseDoCpf(idCliente)); 
 		analise.setAnalisePendencias(realizaAnalisePendencias(idCliente)); 
 		analise.setAnaliseRenda(realizaAnaliseRenda(idCliente)); 
 		analise.setAnalisePerc(100); 
 		analise.setConcessao(dto.getConcessao());
-		LocalDate data = LocalDate.parse(dto.getDataAnalise(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		LocalDate data = LocalDate.now();
 		analise.setDataAnalise(data);
-		analise.setSituacao(dto.getSituacao());
+		analise.setScore(geraScore(analise.getAnaliseCpf(),analise.getAnalisePendencias(),analise.getAnaliseRenda(),analise.getAnalisePerc()));
+		analise.setClassificacao(classificaCliente(analise.getScore()));
+		analise.setSituacao(geraSituacaoSemPedido(analise.getClassificacao()));
+		analise.setLimiteDeCredito(geraLimiteDeCredito(analise.getClassificacao()));
 		return repository.save(analise);
 	}
 
@@ -123,7 +126,7 @@ public class AnaliseController {
 		Double vermelho = metricaController.buscaClassificacaoCpfVermelho();
 		Double verde = metricaController.buscaClassificacaoCpfVerde();
 		Double amarelo = metricaController.buscaClassificacaoCpfAmarelo();
-		Integer qtdPedido =	pedidosController.buscaPedidoCliente(cliente);
+		Integer qtdPedido =	pedidosController.buscaPedidoClienteBack(cliente);
 		Double qtd = Double.valueOf(qtdPedido);
 
 		if(qtd == vermelho) {
@@ -225,4 +228,25 @@ public class AnaliseController {
 		return situacao;
 	}
 
+	private String geraSituacaoSemPedido(String classificacao) {
+		String situacao;
+		if(classificacao =="VERMELHO" || classificacao == "AMARELO") {
+			situacao = "REPROVADO";
+		}else {
+			situacao = "APROVADO";
+		}
+		return situacao;
+	}
+	
+	private Double geraLimiteDeCredito(String classificacao) {
+		
+		Double limiteDeCredito = null;
+		if(classificacao == "AZUL") {
+			limiteDeCredito = metricaController.buscaLimiteAzul();
+			return limiteDeCredito;
+		}else if(classificacao == "VERDE") {
+			limiteDeCredito = metricaController.buscaLimiteVerde();
+		}
+		return limiteDeCredito;
+	}
 }

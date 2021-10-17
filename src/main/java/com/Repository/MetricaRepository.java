@@ -51,4 +51,10 @@ public interface MetricaRepository extends JpaRepository<Metrica,Integer> {
 	@Query(value="SELECT m.classVermelho from Metrica as m where id=1")
 	public Double getClassVermelho();
 	
+	@Query(value="SELECT m.limiteVerde from Metrica as m where id=1")
+	public Double getLimiteVerde();
+	
+	@Query(value="SELECT m.limiteAzul from Metrica as m where id=1")
+	public Double getLimiteAzul();
+	
 }

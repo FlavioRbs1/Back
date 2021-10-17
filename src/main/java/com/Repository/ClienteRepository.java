@@ -21,4 +21,8 @@ public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
 	public Double getRenda(Integer id);
 
 
+	@Query(value="SELECT cpf from Cliente where id = :id")
+	public Cliente buscaCpfById(Integer id);
+
+
 }

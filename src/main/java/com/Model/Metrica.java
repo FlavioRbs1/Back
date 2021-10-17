@@ -55,16 +55,16 @@ public class Metrica {
 	private Double cpfVermelho;
 	
 	@Column(length = 15 )
-	private Double idadeAmarelo;
+	private Double limiteAmarelo;
 	
 	@Column(length = 50 )
-	private Double idadeAzul;
+	private Double limiteAzul;
 	
 	@Column(length = 15 )
-	private Double idadeVerde;
+	private Double limiteVerde;
 	
 	@Column(length = 15 )
-	private Double idadeVermelho;
+	private Double limiteVermelho;
 	
 	@Column(length = 50 )
 	private Double limiteCredito;
@@ -123,30 +123,6 @@ public class Metrica {
 
 	public void setCpfAzul(Double cpfAzul) {
 		this.cpfAzul = cpfAzul;
-	}
-
-	public Double getIdadeVermelho() {
-		return idadeVermelho;
-	}
-
-	public void setIdadeVermelho(Double idadeVermelho) {
-		this.idadeVermelho = idadeVermelho;
-	}
-
-	public Double getIdadeVerde() {
-		return idadeVerde;
-	}
-
-	public void setIdadeVerde(Double idadeVerde) {
-		this.idadeVerde = idadeVerde;
-	}
-
-	public Double getIdadeAzul() {
-		return idadeAzul;
-	}
-
-	public void setIdadeAzul(Double idadeAzul) {
-		this.idadeAzul = idadeAzul;
 	}
 
 	public Double getLimiteCredito() {
@@ -245,12 +221,37 @@ public class Metrica {
 		this.classAzul = classAzul;
 	}
 
-	public Double getIdadeAmarelo() {
-		return idadeAmarelo;
+	public Double getLimiteAmarelo() {
+		return limiteAmarelo;
 	}
 
-	public void setIdadeAmarelo(Double idadeAmarelo) {
-		this.idadeAmarelo = idadeAmarelo;
+	public void setLimiteAmarelo(Double limiteAmarelo) {
+		this.limiteAmarelo = limiteAmarelo;
 	}
-	
+
+	public Double getLimiteAzul() {
+		return limiteAzul;
+	}
+
+	public void setLimiteAzul(Double limiteAzul) {
+		this.limiteAzul = limiteAzul;
+	}
+
+	public Double getLimiteVerde() {
+		return limiteVerde;
+	}
+
+	public void setLimiteVerde(Double limiteVerde) {
+		this.limiteVerde = limiteVerde;
+	}
+
+	public Double getLimiteVermelho() {
+		return limiteVermelho;
+	}
+
+	public void setLimiteVermelho(Double limiteVermelho) {
+		this.limiteVermelho = limiteVermelho;
+	}
+
+
 }

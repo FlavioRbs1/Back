@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Model.Cliente;
 import com.Model.Pedidos;
 
 public interface PedidosRepository extends JpaRepository<Pedidos,Integer> {
@@ -39,6 +40,9 @@ public interface PedidosRepository extends JpaRepository<Pedidos,Integer> {
 	
 	@Query(value="SELECT p from Pedidos as p where id = :id")
 	public Pedidos findByPedido(Integer id);
+
+	@Query(value="SELECT p.cliente from Pedidos as p where p.id = :id")
+	public Cliente buscaClientePorPedido(Integer id);
 
 	@Query(value="SELECT p.situacao from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
 	public String getSituacaoPedido(Integer idCliente);

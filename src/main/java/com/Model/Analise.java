@@ -64,7 +64,19 @@ public class Analise {
 	@Column
 	private String classificacao;
 	
+	@Column
+	private Double limiteDeCredito;
 	
+	
+	
+	public Double getLimiteDeCredito() {
+		return limiteDeCredito;
+	}
+
+	public void setLimiteDeCredito(Double limiteDeCredito) {
+		this.limiteDeCredito = limiteDeCredito;
+	}
+
 	public String getClassificacao() {
 		return classificacao;
 	}

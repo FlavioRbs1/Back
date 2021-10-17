@@ -16,8 +16,17 @@ public class AnaliseDTO {
 	private Integer idPedido;
 	private Double score;
 	private String classificacao;
+	private Double limiteDeCredito;
 	
 	
+	
+	
+	public Double getLimiteDeCredito() {
+		return limiteDeCredito;
+	}
+	public void setLimiteDeCredito(Double limiteDeCredito) {
+		this.limiteDeCredito = limiteDeCredito;
+	}
 	public String getClassificacao() {
 		return classificacao;
 	}
