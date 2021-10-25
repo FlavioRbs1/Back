@@ -23,6 +23,8 @@ import com.Model.Pedidos;
 import com.Repository.AnaliseRepository;
 import com.Repository.ClienteRepository;
 import com.Repository.InadimplenciasRepository;
+import com.Repository.PedidosRepository;
+
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +38,7 @@ public class AnaliseController {
 	private final AnaliseRepository repository;
 	private final ClienteRepository clienteRepository;
 	private final PedidosController pedidosController;
+	private final PedidosRepository pedidosRepository;
 	private final MetricaController metricaController;
 	private final InadimplenciasRepository inadimplenciasRepository;
 
@@ -44,6 +47,7 @@ public class AnaliseController {
 	public AnaliseController(
 							AnaliseRepository repository,
 							ClienteRepository clienteRepository , 
+							PedidosRepository pedidosRepository,
 							PedidosController pedidosController,
 							InadimplenciasRepository inadimplenciasRepository, 
 							MetricaController metricaController) {
@@ -52,6 +56,7 @@ public class AnaliseController {
 		this.pedidosController = pedidosController;
 		this.inadimplenciasRepository = inadimplenciasRepository;
 		this.metricaController = metricaController;
+		this.pedidosRepository = pedidosRepository;
 	}
 
 	@PostMapping(value="/postanalisecp")
@@ -79,9 +84,6 @@ public class AnaliseController {
 	}
 
 
-
-
-	
 	@PostMapping(value="/postanalisedecliente")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Analise gerar(@RequestBody AnaliseDTO dto) {
@@ -104,31 +106,14 @@ public class AnaliseController {
 		return repository.save(analise);
 	}
 
-	
-	@GetMapping(value="/{idPedido}/{idCliente}")
-	public ResponseEntity<Object> busca(@PathVariable Integer idPedido, Integer idCliente){
-		return ResponseEntity.ok(repository.findAnaliseByPedidoCliente(idPedido , idCliente));
-	}
-	
-	@GetMapping(value="/lista")
-	public List<Analise> obterTodos(){
-
-		return repository.findAll();
-	}
-	
-	@PutMapping (value="/replace/{id}")
-	public Analise replace (@PathVariable Integer id, @RequestBody Analise analise) {
-		return repository.save(analise);
-	}	
-
 	private Integer realizaAnaliseDoCpf(Integer cliente) {
-
+		
 		Double vermelho = metricaController.buscaClassificacaoCpfVermelho();
 		Double verde = metricaController.buscaClassificacaoCpfVerde();
 		Double amarelo = metricaController.buscaClassificacaoCpfAmarelo();
 		Integer qtdPedido =	pedidosController.buscaPedidoClienteBack(cliente);
 		Double qtd = Double.valueOf(qtdPedido);
-
+		
 		if(qtd == vermelho) {
 			return 25;
 		}else if(qtd == amarelo) {
@@ -138,28 +123,28 @@ public class AnaliseController {
 		}
 		return 100;
 	}
-
+	
 	private Integer realizaAnalisePendencias(Integer cliente) {
-
+		
 		Integer qtdPendencias = inadimplenciasRepository.findByCliente(cliente);
 		Double azul = metricaController.buscaPendenciasAzul();
 		Integer aux = azul.intValue();
-
+		
 		if(qtdPendencias == aux) {
 			return 100;
 		}
-
+		
 		return 0;
 	}
-
+	
 	private Integer realizaAnaliseRenda(Integer cliente) {
-
+		
 		Double rendaCliente = clienteRepository.getRenda(cliente);
 		Double rendaAzul = metricaController.buscaRendaAzul();
 		Double rendaAmarelo = metricaController.buscaRendaAmarelo();
 		Double rendaVerde= metricaController.buscaRendaVerde();
 		Double rendaVermelho = metricaController.buscaRendaVermelho();
-
+		
 		if(rendaCliente <= rendaVermelho) {
 			return 0;
 		}else if(rendaCliente > rendaVermelho && rendaCliente <= rendaAmarelo) {
@@ -171,17 +156,17 @@ public class AnaliseController {
 		}
 		return 100;
 	}
-
+	
 	private Integer verificaPercentual(Integer cliente, Integer pedido) {
 		Double valorPedido = pedidosController.buscaValorPedidoBack(pedido);
 		Integer parcelaPedido = pedidosController.buscaParcelaPedidoBack(pedido);
 		Double valorParcela = valorPedido/parcelaPedido;
-
+		
 		Double rendaCliente = clienteRepository.getRenda(cliente);
 		Double perc = metricaController.buscaPercentual();
 		perc = perc/100;
 		Double percentualRendaClientePedido = rendaCliente*perc; 
-
+		
 		Integer valor = percentualRendaClientePedido.compareTo(valorParcela);
 		if(valor > 0) {
 			return 100;
@@ -194,7 +179,7 @@ public class AnaliseController {
 		Double score = (double) ((a+b+c+d)/4);
 		return score;
 	}
-
+	
 	private String classificaCliente(Double score) {
 		Double classeVerde = metricaController.buscaClasseVerde();
 		Double classeAmarelo = metricaController.buscaClasseAmarelo();
@@ -227,7 +212,7 @@ public class AnaliseController {
 		}
 		return situacao;
 	}
-
+	
 	private String geraSituacaoSemPedido(String classificacao) {
 		String situacao;
 		if(classificacao =="VERMELHO" || classificacao == "AMARELO") {
@@ -249,4 +234,48 @@ public class AnaliseController {
 		}
 		return limiteDeCredito;
 	}
+	
+	@GetMapping(value="/{idPedido}/{idCliente}")
+	public ResponseEntity<Object> busca(@PathVariable Integer idPedido, Integer idCliente){
+		return ResponseEntity.ok(repository.findAnaliseByPedidoCliente(idPedido , idCliente));
+	}
+	
+	@GetMapping(value="/getanalise/{id}")
+	public ResponseEntity<Object> busca(@PathVariable Integer id){
+		return ResponseEntity.ok(repository.findById(id));
+	}
+	
+	@GetMapping(value="/lista")
+	public List<Analise> obterTodos(){
+		return repository.findAll();
+	}
+	
+	@GetMapping(value="/aprovados")
+	public List<Integer> aprovados() {
+		return repository.getAprovados();
+	}
+	
+	@GetMapping(value="/reprovados")
+	public Integer reprovados() {
+		return repository.getReprovados();
+	}
+	
+	@GetMapping(value="/aprovadossobconcessao")
+	public Integer sobConcessao() {
+		return repository.getsobConcessao();
+	}
+	
+	
+	@PutMapping (value="/replace/{id}")
+	public Analise replace (@PathVariable Integer id, @RequestBody Analise analise) {
+		return repository.save(analise);
+	}	
+	
+	@PutMapping (value="/liberasobconcessao/{id}/{concessao}")
+	public Object replaceSobConcessao(@PathVariable Integer id, String concessao, @RequestBody Analise analise) {
+		return repository.liberaSobConcessao(id,concessao);
+	}	
+
+	
+	
 }
