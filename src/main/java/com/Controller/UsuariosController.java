@@ -7,7 +7,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import com.Model.Usuarios;
 import com.Repository.UsuariosRepository;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/usuarios")
 public class UsuariosController {
 	
@@ -29,7 +32,7 @@ public class UsuariosController {
 	}
 	
 	@PostMapping(value="/save")
-	public Usuarios save(@RequestBody @Valid UsuariosDTO dto) {
+	public Usuarios save(@RequestBody UsuariosDTO dto) {
 		Usuarios usuario = new Usuarios();
 		usuario.setUser(dto.getUser());
 		usuario.setLogin(dto.getLogin());
@@ -45,5 +48,16 @@ public class UsuariosController {
 	public List<Usuarios> obterTodos(){
 		return repository.findAll();
 	}
-
+	@GetMapping(value="/getlogin/{login}")
+	public String getLogin( @PathVariable String login) {
+		return repository.getLogin(login);
+	}
+	@GetMapping(value="/getsenha/{login}")
+	public String getSenha( @PathVariable String login) {
+		return repository.getSenha(login);
+	}
+	@GetMapping(value="/getnome/{login}")
+	public String getNome( @PathVariable String login) {
+		return repository.getNome(login);
+	}
 }
