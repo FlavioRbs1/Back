@@ -21,5 +21,5 @@ public interface UsuariosRepository extends JpaRepository<Usuarios,Integer> {
 
 	@Query(value="SELECT u.user from Usuarios as u where u.login = :login")
 	public String getNome(String login);
-
+	
 }

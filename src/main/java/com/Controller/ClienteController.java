@@ -1,6 +1,7 @@
 package com.Controller;
 import java.util.Optional;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.Model.Cliente;
 import com.Repository.ClienteRepository;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @RestController
 @CrossOrigin
@@ -51,10 +54,23 @@ public class ClienteController {
 	public Double getRenda(@PathVariable(name="id",required = false) Integer id) {
 		return repository.getRenda(id);
 	}
+	@GetMapping(value="/validacpf/{cpf}")
+	public Boolean validaCpf(@PathVariable(name="cpf",required = true)String cpf) {
+		Integer retorno = repository.validaCpf(cpf);
+		if(retorno >0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
 	@PutMapping (value = "/busca/{cpf}")
 	public Cliente replace(@PathVariable String cpf,@RequestBody Cliente cliente) {
 		return repository.save(cliente);
 	}
+	
 	
 	
 }

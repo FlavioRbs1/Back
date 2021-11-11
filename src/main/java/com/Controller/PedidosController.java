@@ -2,6 +2,8 @@ package com.Controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Model.Cliente;
 import com.Model.Pedidos;
+import com.Repository.ClienteRepository;
 import com.Repository.PedidosRepository;
 
 @RestController
@@ -25,6 +28,7 @@ public class PedidosController {
 	
 	@Autowired
 	PedidosRepository repository;
+	ClienteRepository clienteRepository;
 	
 	@PostMapping(value = "/save")
 	public Pedidos save(@RequestBody Pedidos pedido) {
@@ -79,6 +83,11 @@ public class PedidosController {
 	public Pedidos buscaPedido(@PathVariable (name="id",required = false) Integer id){
 		return repository.findByPedido(id);
 	}
+	@GetMapping(value="/pedidosemcredito")
+	public List<Pedidos>pedidosEmCredito(){
+		return repository.pedidosEmCredito();
+	}
+	
 	@PutMapping(value="/aprovapedido/{id}")
 	public Integer aprovaPedido(@PathVariable Integer id) {
 		return repository.aprova(id);
@@ -87,5 +96,7 @@ public class PedidosController {
 	public Integer reprovaPedido(@PathVariable Integer id) {
 		return repository.reprova(id);
 	}
+	
+	
 	
 }

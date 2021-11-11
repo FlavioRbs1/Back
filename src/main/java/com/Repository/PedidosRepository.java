@@ -2,6 +2,7 @@ package com.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,7 +53,7 @@ public interface PedidosRepository extends JpaRepository<Pedidos,Integer> {
 
 	@Query(value="SELECT p.formaPagamento from Pedidos as p where id_cliente = :idCliente  and situacao = 'CREDITO'")
 	public String buscaFormaPedido(Integer idCliente);
-
+	
 	@Transactional
 	@Modifying
 	@Query(value="UPDATE Pedidos as p set p.situacao ='APROVADO' where id = :id")
@@ -62,4 +63,8 @@ public interface PedidosRepository extends JpaRepository<Pedidos,Integer> {
 	@Modifying
 	@Query(value="UPDATE Pedidos as p set p.situacao ='REPROVADO' where id = :id")
 	public Integer reprova(Integer id);
+
+	@Query(value="SELECT p from Pedidos as p where situacao ='CREDITO'")
+	public List<Pedidos> pedidosEmCredito();
+
 }

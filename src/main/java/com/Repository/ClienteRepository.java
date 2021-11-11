@@ -25,4 +25,7 @@ public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
 	public Cliente buscaCpfById(Integer id);
 
 
+	@Query(value="SELECT COUNT(*) as valida from Cliente where cpf =:cpf")
+	public Integer validaCpf(String cpf);
+
 }
